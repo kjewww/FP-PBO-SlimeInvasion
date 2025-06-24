@@ -11,6 +11,7 @@ namespace ShooterGame2D
         private Button pauseButton;
         private Button restartButton;
         private Button exitButton;
+        private Bitmap backgroundBuffer;
 
         private int ScoreCounter = 0;
         private Label Score;
@@ -40,6 +41,7 @@ namespace ShooterGame2D
             this.Size = new Size(1920, 1080);
             this.BackColor = Color.DarkGray;
             this.StartPosition = FormStartPosition.CenterScreen;
+            backgroundBuffer = new Bitmap(Resource.background__2_, this.ClientSize.Width, this.ClientSize.Height);
 
             player = new Player(new PointF(this.ClientSize.Width/2, this.ClientSize.Height/2));
 
@@ -274,7 +276,7 @@ namespace ShooterGame2D
 
         private void DrawGame(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Resource.background__2_, 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+            e.Graphics.DrawImage(backgroundBuffer, 0, 0);
 
             player.Draw(e.Graphics);
 
@@ -295,6 +297,8 @@ namespace ShooterGame2D
             slimes.Clear();
             ScoreCounter = 0;
             Score.Text = "Score: 0";
+            player.Health = 100;
+            HealthBar.Text = "Health: " + player.Health;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
