@@ -36,9 +36,13 @@ namespace ShooterGame2D
             // play button
             playButton = new Button
             {
-                Text = "Start",
-                Size = new Size(200, 50),
-                Location = new Point(this.ClientSize.Width/2 - 100, 250)
+                Size = new Size(200, 200),
+                Location = new Point(this.ClientSize.Width/2 - 100, 250),
+                BackgroundImage = Resource.Play,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                BackColor = Color.Transparent,
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.Transparent, MouseOverBackColor = Color.Transparent }
             };
             playButton.Click += PlayButton_Click;
             this.Controls.Add(playButton);

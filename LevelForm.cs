@@ -76,7 +76,7 @@ namespace ShooterGame2D
                 ForeColor = Color.Red,
                 BackColor = Color.Red,
             };
-            this.Controls.Add(HealthGraph);
+            //this.Controls.Add(HealthGraph);
 
             // time label
             TimeLabel = new Label
@@ -189,7 +189,7 @@ namespace ShooterGame2D
             for (int i = slimes.Count - 1; i >= 0; i--)
             {
                 var slime = slimes[i];
-                slime.TargettingPlayer(player);
+                slime.TargettingPlayer(player); //polymorphism
 
                 // klo kena player
                 if (player.isHit(slime))
@@ -309,6 +309,25 @@ namespace ShooterGame2D
             {
                 drawable.Draw(e.Graphics);
             }
+
+            // health bar
+            int barWidth = 400;
+            int barHeight = 40;
+            int x = 10;
+            int y = 20;
+            float healthPercent = Math.Max(0, (float)player.Health / 100f);
+
+            if (healthPercent > 0.5)
+                e.Graphics.FillRectangle(Brushes.LimeGreen, x, y, (int)(barWidth * healthPercent), barHeight); // bar
+
+            else if (healthPercent > 0.25)
+                e.Graphics.FillRectangle(Brushes.Yellow, x, y, (int)(barWidth * healthPercent), barHeight); // bar
+
+            else
+                e.Graphics.FillRectangle(Brushes.Red, x, y, (int)(barWidth * healthPercent), barHeight); // bar
+
+            e.Graphics.DrawRectangle(Pens.Black, x, y, barWidth, barHeight); // border
+
         }
 
         private void RestartButton_Click(object sender, EventArgs e)
