@@ -10,6 +10,7 @@ namespace ShooterGame2D
     {
         private Button playButton;
         private Button exitButton;
+        private Label titleLabel;
 
         public MainMenu()
         {
@@ -22,12 +23,25 @@ namespace ShooterGame2D
             this.Size = new Size(800,600);
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            // judul game
+            titleLabel = new Label
+            {
+                Text = "Slime Invasion!",
+                Font = new Font("Pixelify Sans", 48, FontStyle.Bold),
+                AutoSize = true,
+                Location = new Point(30, 100),
+            };
+            this.Controls.Add(titleLabel);
+
             // play button
-            playButton = new Button();
-            playButton.Text = "Play Game";
-            playButton.Size = new Size(200, 50);
-            playButton.Location = new Point(this.ClientSize.Width/2 - 100, this.ClientSize.Height/2 - 50);
+            playButton = new Button
+            {
+                Text = "Start",
+                Size = new Size(200, 50),
+                Location = new Point(this.ClientSize.Width/2 - 100, 250)
+            };
             playButton.Click += PlayButton_Click;
+            this.Controls.Add(playButton);
         }
 
         private void InitlializeControls()

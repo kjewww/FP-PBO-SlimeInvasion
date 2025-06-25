@@ -28,6 +28,10 @@ namespace ShooterGame2D
         public Player player;
         public List<Bullet> Bullets = new List<Bullet>();
         public List<Slime> slimes = new List<Slime>();
+        System.Windows.Forms.Timer GreenTimer = new System.Windows.Forms.Timer();
+        System.Windows.Forms.Timer BlackTimer = new System.Windows.Forms.Timer();
+        System.Windows.Forms.Timer RedTimer = new System.Windows.Forms.Timer();
+        System.Windows.Forms.Timer BlueTimer = new System.Windows.Forms.Timer();
 
         private System.Windows.Forms.Timer Timer = new System.Windows.Forms.Timer();
         HashSet<Keys> keysPressed = new HashSet<Keys>();
@@ -56,7 +60,7 @@ namespace ShooterGame2D
                 Text = "Score: 0",
                 Location = new Point(10, 70),
                 AutoSize = true,
-                Font = new Font("Arial", 24, FontStyle.Bold),
+                Font = new Font("Pixelify Sans", 24),
                 ForeColor = Color.Black,
                 BackColor = Color.Transparent
             };
@@ -70,7 +74,7 @@ namespace ShooterGame2D
                 Maximum = 100,
                 Value = player.Health,
                 ForeColor = Color.Red,
-                BackColor = Color.Red
+                BackColor = Color.Red,
             };
             this.Controls.Add(HealthGraph);
 
@@ -80,9 +84,9 @@ namespace ShooterGame2D
                 Text = "00:00:00",
                 Location = new Point(this.ClientSize.Width / 2 - 75, 0),
                 AutoSize = true,
-                Font = new Font("Arial", 24),
+                Font = new Font("Pixelify Sans", 24),
                 ForeColor = Color.Black,
-                BackColor = Color.Transparent
+                BackColor = Color.White
             };
             this.Controls.Add(TimeLabel);
             TimerText.Interval = 1000;
@@ -92,9 +96,13 @@ namespace ShooterGame2D
             // restart button
             restartButton = new Button
             {
-                Text = "R",
-                Size = new Size(50, 50),
-                Location = new Point(this.ClientSize.Width - 120, 10),
+                Size = new Size(80, 80),
+                Location = new Point(this.ClientSize.Width - 180, 10),
+                BackgroundImage = Resource.Restart,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                BackColor = Color.Transparent,
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.Transparent, MouseOverBackColor = Color.Transparent }
             };
             restartButton.Click += RestartButton_Click;
             this.Controls.Add(restartButton);
@@ -102,9 +110,13 @@ namespace ShooterGame2D
             // exit button
             exitButton = new Button
             {
-                Text = "X",
-                Size = new Size(50, 50),
-                Location = new Point(ClientSize.Width - 60, 10),
+                Size = new Size(80, 80),
+                Location = new Point(ClientSize.Width - 90, 10),
+                BackgroundImage = Resource.Exit,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                BackColor = Color.Transparent,
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.Transparent, MouseOverBackColor = Color.Transparent }
             };
             exitButton.Click += ExitButton_Click;
             this.Controls.Add(exitButton);
@@ -173,20 +185,20 @@ namespace ShooterGame2D
                 }
             }
 
-            // Update Slimes & Cek tabrakan dengan peluru
+            // update slime
             for (int i = slimes.Count - 1; i >= 0; i--)
             {
                 var slime = slimes[i];
                 slime.TargettingPlayer(player);
 
-                // Cek tabrakan dengan player
+                // klo kena player
                 if (player.isHit(slime))
                 {
                     player.TakeDamage(slime.Damage);
                     UpdateHealthBar();
                 }
 
-                // Cek tabrakan dengan peluru
+                // klo kena bullet
                 for (int j = Bullets.Count - 1; j >= 0; j--)
                 {
                     if (slime.isHit(Bullets[j]))
@@ -232,7 +244,6 @@ namespace ShooterGame2D
         private void EnemySpawner()
         {
             // ijo
-            System.Windows.Forms.Timer GreenTimer = new System.Windows.Forms.Timer();
             GreenTimer.Interval = 1000;
             GreenTimer.Tick += (s, e) => 
             {
@@ -246,7 +257,6 @@ namespace ShooterGame2D
             GreenTimer.Start();
 
             // merah
-            System.Windows.Forms.Timer RedTimer = new System.Windows.Forms.Timer();
             RedTimer.Interval = 6000;
             RedTimer.Tick += (s, e) =>
             {
@@ -260,7 +270,6 @@ namespace ShooterGame2D
             RedTimer.Start();
 
             // biru
-            System.Windows.Forms.Timer BlueTimer = new System.Windows.Forms.Timer();
             BlueTimer.Interval = 11000;
             BlueTimer.Tick += (s, e) =>
             {
@@ -274,7 +283,6 @@ namespace ShooterGame2D
             BlueTimer.Start();
 
             // hitam
-            System.Windows.Forms.Timer BlackTimer = new System.Windows.Forms.Timer();
             BlackTimer.Interval = 16000;
             BlackTimer.Tick += (s, e) =>
             {
@@ -314,6 +322,10 @@ namespace ShooterGame2D
 
             slimes.Clear();
             Bullets.Clear();
+            GreenTimer.Stop();
+            RedTimer.Stop();
+            BlueTimer.Stop();
+            BlackTimer.Stop();
 
             ScoreCounter = 0;
             Score.Text = "Score: 0";
