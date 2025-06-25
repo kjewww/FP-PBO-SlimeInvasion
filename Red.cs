@@ -13,7 +13,10 @@ namespace ShooterGame2D
             Health = 4;
             Damage = 1;
             Speed = 6;
+            Score = 2;
+
             Position = startPosition;
+
             frames = new Image[]
             {
                 Resource.merah1,

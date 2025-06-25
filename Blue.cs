@@ -13,7 +13,10 @@ namespace ShooterGame2D
             Health = 5;
             Damage = 1;
             Speed = 7;
+            Score = 3;
+
             Position = startPosition;
+
             frames = new Image[]
             {
                 Resource.biru1,

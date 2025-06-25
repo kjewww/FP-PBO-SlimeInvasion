@@ -6,27 +6,16 @@ using System.Threading.Tasks;
 
 namespace ShooterGame2D
 {
-    public class Slime
+    public class Slime : Entity, IDrawable
     {
-        public int Health { get; set; }
-        public int Damage { get; set; }
-        public float Speed { get; set; }
-        public PointF Position { get; set; }
-        public Size size = new(64, 64);
+        public int Score { get; set; }
 
-        // animasi
-        protected Image[] frames;
-        protected int currentFrame = 0;
-        protected int frameCount = 4;
-        protected int animationCounter = 0;
-        protected int animationSpeed = 8;
-        protected bool isFacingLeft = false;
-
-        public Slime(PointF startPosition)
+        public Slime(PointF startPosition) : base(startPosition)
         {
             Health = 3;
             Damage = 1;
-            Speed = 10;
+            Speed = 5;
+            Score = 1;
             Position = startPosition;
 
             frames = new Image[]
@@ -37,21 +26,12 @@ namespace ShooterGame2D
                 Resource.Slime4,
             };
         }
-        public void TakeDamage(int damage)
-        {
-            Health -= damage;
-        }
 
         public bool isHit(Bullet bullet)
         {
             RectangleF enemyRect = new RectangleF(Position.X, Position.Y, size.Width, size.Height);
             RectangleF bulletRect = new RectangleF(bullet.Position.X, bullet.Position.Y, bullet.size.Width, bullet.size.Height);
             return enemyRect.IntersectsWith(bulletRect);
-        }
-
-        public void Attack(Player player)
-        {
-
         }
 
         public void TargettingPlayer(Player player)
@@ -72,16 +52,7 @@ namespace ShooterGame2D
             }
         }
 
-        public virtual void Draw(Graphics g)
-        {
-            int size = 32;
-            using (Brush brush = new SolidBrush(Color.Red))
-            {
-                g.FillRectangle(brush, Position.X, Position.Y, size, size);
-            }
-        }
-
-        public virtual void DrawWithAnimation(Graphics g)
+        public void Draw(Graphics g)
         {
             Image frame = frames[currentFrame];
 

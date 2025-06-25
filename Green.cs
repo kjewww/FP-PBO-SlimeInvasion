@@ -14,6 +14,7 @@ namespace ShooterGame2D
             Health = 3;
             Damage = 1;
             Speed = 5;
+            Score = 1;
 
             Position = startPosition;
 

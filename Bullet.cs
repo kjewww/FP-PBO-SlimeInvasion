@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ShooterGame2D
 {
-    public class Bullet
+    public class Bullet : IDrawable
     {
         public PointF Position { get; set; }
         private PointF Direction;
         private float Speed = 20;
-        public Size size = new Size(16, 16);   
+        public Size size = new Size(16, 16);
 
         public Bullet(PointF startPos, PointF targetPos)
         {

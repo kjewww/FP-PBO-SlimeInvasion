@@ -7,22 +7,9 @@ using System.Threading.Tasks;
 
 namespace ShooterGame2D
 {
-    public class Player
+    public class Player : Entity, IDrawable
     {
-        public int Health { get; set; }
-        public int Damage { get; set; }
-        public int Ammo { get; set; }
-        public int Speed { get; set; }
-
-        private Size size = new(64, 64);
         private bool IsWalking = false;
-
-        private Image[] frames;
-        private int currentFrame = 0;
-        private int frameCount = 4;
-        private int animationCounter = 0;
-        private int animationSpeed = 8;
-        private bool isFacingLeft = false;
 
         private Image[] framesIdle;
         private int currentFrameIdle = 0;
@@ -30,13 +17,10 @@ namespace ShooterGame2D
         private int animationCounterIdle = 0;
         private int animationSpeedIdle = 8;
 
-        public PointF Position { get; set; }
-
-        public Player(PointF startPosition)
+        public Player(PointF startPosition) : base(startPosition)
         {
             Health = 100;
             Damage = 1;
-            Ammo = 10;
             Speed = 10;
             Position = startPosition;
 
@@ -103,12 +87,6 @@ namespace ShooterGame2D
             }
         }
 
-        public void TakeDamage(int damage)
-        {
-            Health -= damage;
-            if (Health < 0) Health = 0;
-        }
-
         public bool isHit(Slime enemy)
         {
             RectangleF playerRect = new RectangleF(Position.X, Position.Y, 64, 64);
@@ -116,7 +94,7 @@ namespace ShooterGame2D
             return playerRect.IntersectsWith(enemyRect);
         }
 
-        public void Reload(int ammoAmount)
+        public void GetPotion()
         {
 
         }

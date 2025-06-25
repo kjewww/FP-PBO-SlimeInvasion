@@ -13,7 +13,10 @@ namespace ShooterGame2D
             Health = 10;
             Damage = 1;
             Speed = 7;
+            Score = 5;
+
             Position = startPosition;
+
             frames = new Image[]
             {
                 Resource.Hytam1,

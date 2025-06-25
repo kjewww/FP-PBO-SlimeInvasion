@@ -15,14 +15,14 @@ namespace ShooterGame2D
 
         private int ScoreCounter = 0;
         private Label Score;
-        private Label HealthBar;
+        //private Label HealthBar;
+        private ProgressBar HealthGraph;
         private Label TimeLabel;
         private System.Windows.Forms.Timer TimerText = new System.Windows.Forms.Timer();
         private int elapsedSeconds = 0;
 
         public Player player;
         public List<Bullet> Bullets = new List<Bullet>();
-
         public List<Slime> slimes = new List<Slime>();
 
         private System.Windows.Forms.Timer Timer = new System.Windows.Forms.Timer();
@@ -49,32 +49,44 @@ namespace ShooterGame2D
             Score = new Label
             {
                 Text = "Score: 0",
-                Location = new Point(10, 10),
+                Location = new Point(10, 70),
                 AutoSize = true,
-                Font = new Font("Arial", 16),
+                Font = new Font("Arial", 24),
                 ForeColor = Color.Black
             };
             this.Controls.Add(Score);
 
             // health bar
-            HealthBar = new Label
+            //HealthBar = new Label
+            //{
+            //    Text = "Health: " + player.Health,
+            //    Location = new Point(10, 40),
+            //    AutoSize = true,
+            //    Font = new Font("Arial", 16),
+            //    ForeColor = Color.Black
+            //};
+            //this.Controls.Add(HealthBar);
+
+            // health bar (2)
+            HealthGraph = new ProgressBar
             {
-                Text = "Health: " + player.Health,
-                Location = new Point(10, 40),
-                AutoSize = true,
-                Font = new Font("Arial", 16),
-                ForeColor = Color.Black
+                Location = new Point(10, 20),
+                Size = new Size(400, 40),
+                Maximum = 100,
+                Value = player.Health,
+                ForeColor = Color.Red
             };
-            this.Controls.Add(HealthBar);
+            this.Controls.Add(HealthGraph);
 
             // time label
             TimeLabel = new Label
             {
                 Text = "00:00:00",
-                Location = new Point(10, 70),
+                Location = new Point(this.ClientSize.Width / 2 - 75, 0),
                 AutoSize = true,
-                Font = new Font("Arial", 16),
-                ForeColor = Color.Black
+                Font = new Font("Arial", 24),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent
             };
             this.Controls.Add(TimeLabel);
             TimerText.Interval = 1000;
@@ -187,7 +199,7 @@ namespace ShooterGame2D
                         if (slime.Health <= 0)
                         {
                             slimes.RemoveAt(i);
-                            UpdateScore();
+                            UpdateScore(slime.Score);
                             break;
                         }
                     }
@@ -196,15 +208,17 @@ namespace ShooterGame2D
             }
         }
 
-        private void UpdateScore()
+        private void UpdateScore(int slimeScore)
         {
-            ScoreCounter++;
+            ScoreCounter += slimeScore;
             Score.Text = $"Score: {ScoreCounter}";
         }
 
         private void UpdateHealthBar()
         {
-            HealthBar.Text = $"Health: {player.Health}";
+            //HealthBar.Text = $"Health: {player.Health}";
+            HealthGraph.Value = Math.Max(0, Math.Min(player.Health, HealthGraph.Maximum));
+
             if (player.Health <= 0)
             {
                 Timer.Stop();
@@ -217,7 +231,7 @@ namespace ShooterGame2D
 
         private void EnemySpawner()
         {
-            // green
+            // ijo
             System.Windows.Forms.Timer GreenTimer = new System.Windows.Forms.Timer();
             GreenTimer.Interval = 1000;
             GreenTimer.Tick += (s, e) => 
@@ -231,9 +245,9 @@ namespace ShooterGame2D
             };
             GreenTimer.Start();
 
-            // red
+            // merah
             System.Windows.Forms.Timer RedTimer = new System.Windows.Forms.Timer();
-            RedTimer.Interval = 2500;
+            RedTimer.Interval = 6000;
             RedTimer.Tick += (s, e) =>
             {
                 var rand = new Random();
@@ -245,9 +259,9 @@ namespace ShooterGame2D
             };
             RedTimer.Start();
 
-            // blue
+            // biru
             System.Windows.Forms.Timer BlueTimer = new System.Windows.Forms.Timer();
-            BlueTimer.Interval = 5000;
+            BlueTimer.Interval = 11000;
             BlueTimer.Tick += (s, e) =>
             {
                 var rand = new Random();
@@ -259,9 +273,9 @@ namespace ShooterGame2D
             };
             BlueTimer.Start();
 
-            //black
+            // hitam
             System.Windows.Forms.Timer BlackTimer = new System.Windows.Forms.Timer();
-            BlackTimer.Interval = 10000;
+            BlackTimer.Interval = 16000;
             BlackTimer.Tick += (s, e) =>
             {
                 var rand = new Random();
@@ -278,16 +292,14 @@ namespace ShooterGame2D
         {
             e.Graphics.DrawImage(backgroundBuffer, 0, 0);
 
-            player.Draw(e.Graphics);
+            List<IDrawable> drawables = new List<IDrawable>();
+            drawables.Add(player);
+            drawables.AddRange(slimes);
+            drawables.AddRange(Bullets);
 
-            foreach (var slime in slimes)
+            foreach (var drawable in drawables)
             {
-                slime.DrawWithAnimation(e.Graphics);
-            }
-
-            foreach (var Bullet in Bullets)
-            {
-                Bullet.Draw(e.Graphics);
+                drawable.Draw(e.Graphics);
             }
         }
 
@@ -298,7 +310,8 @@ namespace ShooterGame2D
             ScoreCounter = 0;
             Score.Text = "Score: 0";
             player.Health = 100;
-            HealthBar.Text = "Health: " + player.Health;
+            //HealthBar.Text = "Health: " + player.Health;
+            HealthGraph.Value = player.Health;
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
