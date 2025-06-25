@@ -19,14 +19,14 @@ namespace ShooterGame2D
         private void InitializeComponent()
         {
             this.Text = "Main Menu";
-            this.Size = new Size(1366, 768);
+            this.Size = new Size(800,600);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // play button
             playButton = new Button();
             playButton.Text = "Play Game";
             playButton.Size = new Size(200, 50);
-            playButton.Location = new Point(this.ClientSize.Width/2, this.ClientSize.Height/2);
+            playButton.Location = new Point(this.ClientSize.Width/2 - 100, this.ClientSize.Height/2 - 50);
             playButton.Click += PlayButton_Click;
         }
 

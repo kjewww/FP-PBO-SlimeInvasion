@@ -124,6 +124,12 @@
   <data name="background (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\background (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="bgm1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bgm1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bgm2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\bgm2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="biru1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\biru1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,11 +142,17 @@
   <data name="Hytam2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Hytam2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\lose.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="merah1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\merah1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="merah2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\merah2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shoot2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\mixkit-arcade-game-explosion-2759.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Slime1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Slime1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -153,6 +165,9 @@
   </data>
   <data name="Slime4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Slime4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tembak" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\tembak.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="wizard_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\wizard_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

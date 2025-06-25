@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace ShooterGame2D
 {
@@ -12,6 +13,9 @@ namespace ShooterGame2D
         private Button restartButton;
         private Button exitButton;
         private Bitmap backgroundBuffer;
+        private SoundPlayer BGM = new SoundPlayer(Resource.bgm1);    
+        private SoundPlayer Shoot = new SoundPlayer(Resource.tembak);
+        private SoundPlayer Lose = new SoundPlayer(Resource.lose);
 
         private int ScoreCounter = 0;
         private Label Score;
@@ -42,6 +46,7 @@ namespace ShooterGame2D
             this.BackColor = Color.DarkGray;
             this.StartPosition = FormStartPosition.CenterScreen;
             backgroundBuffer = new Bitmap(Resource.background__2_, this.ClientSize.Width, this.ClientSize.Height);
+            BGM.PlayLooping();
 
             player = new Player(new PointF(this.ClientSize.Width/2, this.ClientSize.Height/2));
 
@@ -57,17 +62,6 @@ namespace ShooterGame2D
             this.Controls.Add(Score);
 
             // health bar
-            //HealthBar = new Label
-            //{
-            //    Text = "Health: " + player.Health,
-            //    Location = new Point(10, 40),
-            //    AutoSize = true,
-            //    Font = new Font("Arial", 16),
-            //    ForeColor = Color.Black
-            //};
-            //this.Controls.Add(HealthBar);
-
-            // health bar (2)
             HealthGraph = new ProgressBar
             {
                 Location = new Point(10, 20),
@@ -148,6 +142,7 @@ namespace ShooterGame2D
                 PointF playerCenter = new PointF(player.Position.X + 15, player.Position.Y + 15);
                 PointF mousePos = e.Location;
                 Bullets.Add(new Bullet(playerCenter, mousePos));
+                //Shoot.Play();
             }
         }
 
@@ -222,6 +217,8 @@ namespace ShooterGame2D
             if (player.Health <= 0)
             {
                 Timer.Stop();
+                BGM.Stop();
+                Lose.Play();
 
                 // ntar diganti form baru (score, restart, exit)
                 MessageBox.Show("Game Over! Your score: " + ScoreCounter);
@@ -306,12 +303,20 @@ namespace ShooterGame2D
         private void RestartButton_Click(object sender, EventArgs e)
         {
             player = new Player(new PointF(this.ClientSize.Width/2, this.ClientSize.Height/2));
+
             slimes.Clear();
+            Bullets.Clear();
+
             ScoreCounter = 0;
             Score.Text = "Score: 0";
+
             player.Health = 100;
-            //HealthBar.Text = "Health: " + player.Health;
             HealthGraph.Value = player.Health;
+
+            TimerText.Stop();
+            elapsedSeconds = 0;
+            TimeLabel.Text = "00:00:00";
+            TimerText.Start();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
