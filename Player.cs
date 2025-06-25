@@ -15,7 +15,7 @@ namespace ShooterGame2D
         private int currentFrameIdle = 0;
         private int frameCountIdle = 4;
         private int animationCounterIdle = 0;
-        private int animationSpeedIdle = 8;
+        private int animationSpeedIdle = 16;
 
         public Player(PointF startPosition) : base(startPosition)
         {

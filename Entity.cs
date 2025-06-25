@@ -18,7 +18,7 @@ namespace ShooterGame2D
         protected int currentFrame = 0;
         protected int frameCount = 4;
         protected int animationCounter = 0;
-        protected int animationSpeed = 8;
+        protected int animationSpeed = 16;
         protected bool isFacingLeft = false;
 
         public Entity(PointF startPosition)

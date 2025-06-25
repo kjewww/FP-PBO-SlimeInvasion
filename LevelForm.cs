@@ -56,8 +56,9 @@ namespace ShooterGame2D
                 Text = "Score: 0",
                 Location = new Point(10, 70),
                 AutoSize = true,
-                Font = new Font("Arial", 24),
-                ForeColor = Color.Black
+                Font = new Font("Arial", 24, FontStyle.Bold),
+                ForeColor = Color.Black,
+                BackColor = Color.Transparent
             };
             this.Controls.Add(Score);
 
@@ -68,7 +69,8 @@ namespace ShooterGame2D
                 Size = new Size(400, 40),
                 Maximum = 100,
                 Value = player.Health,
-                ForeColor = Color.Red
+                ForeColor = Color.Red,
+                BackColor = Color.Red
             };
             this.Controls.Add(HealthGraph);
 
@@ -220,9 +222,10 @@ namespace ShooterGame2D
                 BGM.Stop();
                 Lose.Play();
 
-                // ntar diganti form baru (score, restart, exit)
+                // ntar diganti form baru (score, waktu, restart, exit)
                 MessageBox.Show("Game Over! Your score: " + ScoreCounter);
                 Application.Exit();
+
             }
         }
 
@@ -302,7 +305,12 @@ namespace ShooterGame2D
 
         private void RestartButton_Click(object sender, EventArgs e)
         {
-            player = new Player(new PointF(this.ClientSize.Width/2, this.ClientSize.Height/2));
+            Restart();
+        }
+
+        public void Restart()
+        {
+            player = new Player(new PointF(this.ClientSize.Width / 2, this.ClientSize.Height / 2));
 
             slimes.Clear();
             Bullets.Clear();
@@ -317,6 +325,9 @@ namespace ShooterGame2D
             elapsedSeconds = 0;
             TimeLabel.Text = "00:00:00";
             TimerText.Start();
+
+            BGM.Stop();
+            BGM.Play();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
